@@ -39,3 +39,14 @@ class Balle:
             self.x = 3
         if pos[2] >= self.largeur_canevas:
             self.x = -3
+
+
+class Raquette:
+    def __init__(self, canvas, couleur):
+        self.canvas = canvas
+        self.id = canvas.create_rectangle(0, 0, 100, 20, fill=couleur)
+        self.canvas.move(self.id, 200, 300)
+        self.x = 0
+        self.largeur_canevas = self.canvas.winfo_width()
+        self.canvas.bind_all("<KeyPress-Left>", self.vers_gauche)
+        self.canvas.bind_all("<KeyPress-Right>", self.vers_droite)
