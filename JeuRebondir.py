@@ -25,3 +25,17 @@ class Balle:
             if pos[3] >= pos_raquette[1] and pos[3] <= pos_raquette[3]:
                 return True
             return False
+
+    def dessiner(self):
+        self.canvas.move(self.id, self.x, self.y)
+        pos = self.canvas.coords(self.id)
+        if pos[1] <= 0:
+            self.y = 3
+        if pos[3] >= self.hauteur_canevas:
+            self.touche_bas = True
+        if self.heurter_raquette(pos) == True:
+            self.y = -3
+        if pos[0] <= 0:
+            self.x = 3
+        if pos[2] >= self.largeur_canevas:
+            self.x = -3
