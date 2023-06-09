@@ -50,3 +50,26 @@ class Raquette:
         self.largeur_canevas = self.canvas.winfo_width()
         self.canvas.bind_all("<KeyPress-Left>", self.vers_gauche)
         self.canvas.bind_all("<KeyPress-Right>", self.vers_droite)
+
+    def vers_gauche(self, evt):
+        self.x = -4
+
+    def vers_droite(self, evt):
+        self.x = 4
+
+    def dessiner(self):
+        self.canvas.move(self.id, self.x, 0)
+        pos = self.canvas.coords(self.id)
+        if pos[0] <= 0:
+            self.x = 0
+        elif pos[2] >= self.largeur_canevas:
+            self.x = 0
+
+
+tk = Tk()
+tk.title("Jeu")
+tk.resizable(0, 0)
+tk.wm_attributes("-topmost", 1)
+canvas = Canvas(tk, width=500, height=400, bd=0, highlightthickness=0)
+canvas.pack()
+tk.update()
