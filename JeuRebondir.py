@@ -18,3 +18,10 @@ class Balle:
         self.hauteur_canevas = self.canvas.winfo_height()
         self.largeur_canevas = self.canvas.winfo_width()
         self.touche_bas = False
+
+    def heurter_raquette(self, pos):
+        pos_raquette = self.canvas.coords(self.raquette.id)
+        if pos[2] >= pos_raquette[0] and pos[0] <= pos_raquette[2]:
+            if pos[3] >= pos_raquette[1] and pos[3] <= pos_raquette[3]:
+                return True
+            return False
