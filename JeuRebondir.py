@@ -3,7 +3,7 @@ from tkinter import *
 import random
 import time
 
-
+# L'amélioration du projet continue
 # On va cr�er la class de la balle
 class Balle:
     def __init__(self, canvas, raquette, couleur):
