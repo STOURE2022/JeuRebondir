@@ -1,5 +1,5 @@
 # Le jeu cavanas rebondir (balle et raquette)
-# L'amélioration du projet continue
+# L'amélioration du projet continue, donc vous pouvez ajouter des choses
 # On va cr�er la class de la balle
 from tkinter import *
 import random
