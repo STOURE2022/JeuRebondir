@@ -1,10 +1,10 @@
 # Le jeu cavanas rebondir (balle et raquette)
+# L'amélioration du projet continue
+# On va cr�er la class de la balle
 from tkinter import *
 import random
 import time
 
-# L'amélioration du projet continue
-# On va cr�er la class de la balle
 class Balle:
     def __init__(self, canvas, raquette, couleur):
         self.canvas = canvas
@@ -18,13 +18,15 @@ class Balle:
         self.hauteur_canevas = self.canvas.winfo_height()
         self.largeur_canevas = self.canvas.winfo_width()
         self.touche_bas = False
+        self.touches = 0  # Compteur de touches
 
     def heurter_raquette(self, pos):
         pos_raquette = self.canvas.coords(self.raquette.id)
         if pos[2] >= pos_raquette[0] and pos[0] <= pos_raquette[2]:
             if pos[3] >= pos_raquette[1] and pos[3] <= pos_raquette[3]:
+                self.touches += 1  # Incrémente le compteur de touches
                 return True
-            return False
+        return False
 
     def dessiner(self):
         self.canvas.move(self.id, self.x, self.y)
@@ -39,7 +41,6 @@ class Balle:
             self.x = 3
         if pos[2] >= self.largeur_canevas:
             self.x = -3
-
 
 class Raquette:
     def __init__(self, canvas, couleur):
@@ -65,7 +66,6 @@ class Raquette:
         elif pos[2] >= self.largeur_canevas:
             self.x = 0
 
-
 tk = Tk()
 tk.title("Jeu")
 tk.resizable(0, 0)
@@ -77,11 +77,16 @@ tk.update()
 raquette = Raquette(canvas, "black")
 balle = Balle(canvas, raquette, "red")
 
+start_time = time.time()  # Début du chronomètre
 
-while 1:
+while time.time() - start_time < 30:  # Continue pendant 30 secondes
     if balle.touche_bas == False:
         balle.dessiner()
         raquette.dessiner()
     tk.update_idletasks()
     tk.update()
     time.sleep(0.04)
+
+# Affichage des résultats
+print("Nombre de touches :", balle.touches)
+tk.destroy()  # Fermeture de la fenêtre
